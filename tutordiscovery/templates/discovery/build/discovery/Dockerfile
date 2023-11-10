@@ -35,10 +35,10 @@ RUN {% if is_buildkit_enabled() %}--mount=type=cache,target=/openedx/.cache/pip,
     # https://pypi.org/project/setuptools/
     # https://pypi.org/project/pip/
     # https://pypi.org/project/wheel/
-    setuptools==67.7.2 pip==23.1.2. wheel==0.40.0
+    setuptools==68.2.2 pip==23.2.1. wheel==0.41.2
 
 # Install a recent version of nodejs
-RUN pip install nodeenv==1.7.0
+RUN pip install nodeenv==1.8.0
 # nodejs version picked from https://github.com/openedx/course-discovery/blob/master/Dockerfile
 RUN nodeenv /openedx/nodeenv --node=16.14.2 --prebuilt
 ENV PATH /openedx/nodeenv/bin:${PATH}
@@ -59,9 +59,9 @@ RUN {% if is_buildkit_enabled() %}--mount=type=cache,target=/openedx/.cache/bowe
 # Install extra requirements
 RUN {% if is_buildkit_enabled() %}--mount=type=cache,target=/openedx/.cache/pip,sharing=shared {% endif %}pip install \
     # Use redis as a django cache https://pypi.org/project/django-redis/
-    django-redis==5.2.0 \
+    django-redis==5.4.0 \
     # uwsgi server https://pypi.org/project/uWSGI/
-    uwsgi==2.0.21
+    uwsgi==2.0.22
 
 {% if DISCOVERY_ATLAS_PULL %}
 # Pull translations. Support the OEP-58 proposal behind a feature flag until it's fully implemented.
